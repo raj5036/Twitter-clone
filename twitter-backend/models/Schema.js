@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
-const {Schema,model}=require('mongoose')
+const config=require('../config');
+const {Schema,model}=require('mongoose');
 
 let user={
     id          :  {type:String,required:false,unique:true},
@@ -9,11 +10,27 @@ let user={
     password    :  {type:String,required:true,unique:true},
     avatar      :  {type:String,required:false,default:''},
     created_on  :  {type:Date,required:false,default:Date.now},
-    permissions :  {type:String,required:false,default:'Read and Write'},
-    posts       :  {type:Array,default:[]},
-    likes       :  {type:Array,default:[]},
-    comments    :  {type:Array,default:[]},
-    retweets    :  {type:Array,default:[]}
+    permissions :  {type:String,required:false,default:config['USER_PERMISSIONS']['READ_WRITE']},
+    tweets      :  {type:Array,required:false,default:[]},
+    likes       :  {type:Array,required:false,default:[]},
+    comments    :  {type:Array,required:false,default:[]},
+    retweets    :  {type:Array,required:false,default:[]}
 };
 
-let User=module.exports=model('users',new Schema(user));
+let tweet={
+    id          :  {type:String,required:false,unique:true},
+    content     :  {type:String,required:true},
+    created_on  :  {type:Date,required:false,default:Date.now},
+    likes       :  {type:Array,default:[]},
+    comments    :  {type:Array,default:[]},
+    retweets    :  {type:Array,default:[]},
+    user_id     :  {type:String,required:false}
+};
+
+let User=model('users',new Schema(user));
+let Tweet=model('tweets',new Schema(tweet));
+
+module.exports={
+    User,
+    Tweet,
+}

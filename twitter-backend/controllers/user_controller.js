@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/Schema');
+const {User} = require('../models/Schema');
 const uuid = require('uuid');
 const jwt=require('jsonwebtoken');
 
@@ -15,12 +15,13 @@ let handle_register = async (req, res) => {
     id: uuid.v4(),
     firstname: firstname,
     lastname: lastname,
-    email: email,
+    email: email, 
     password: hashed_password,
   });
 
   await user.save((err,result)=>{
       if(err){
+        console.log(err)
         res.status(500).json({success:false,msg:'Internal server error'});
       }else{
         res.status(201).json({success:true,msg:'profile created'}); 

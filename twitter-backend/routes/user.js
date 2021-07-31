@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 
 router.post('/register',(req,res)=>{
-    handle_register(req,res)
+    handle_register(req,res);
 });
 
 router.post('/login',(req,res)=>{
