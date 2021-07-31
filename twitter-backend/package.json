@@ -1,0 +1,17 @@
+{
+  "name": "twitter-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Raj Karmakar",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
