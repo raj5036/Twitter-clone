@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken');
 let handle_register = async (req, res) => {
 
   let { firstname, lastname, email, password } = req.body;
-
+  
   //Encrypt user entered password
   let salt = await bcrypt.genSalt();
   let hashed_password = await bcrypt.hash(password, salt);
@@ -22,7 +22,7 @@ let handle_register = async (req, res) => {
   await user.save((err,result)=>{
       if(err){
         console.log(err)
-        res.status(500).json({success:false,msg:'Internal server error'});
+        res.status(500).json({success:false,msg:'Internal server error/Try signing up'});
       }else{
         res.status(201).json({success:true,msg:'profile created'}); 
       }

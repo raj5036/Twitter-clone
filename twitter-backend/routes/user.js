@@ -3,6 +3,7 @@ const { handle_register, handle_login } = require('../controllers/user_controlle
 const app = express();
 const router = express.Router();
 
+
 router.post('/register',(req,res)=>{
     handle_register(req,res);
 });
