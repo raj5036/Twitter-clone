@@ -4,6 +4,7 @@ const express=require('express');
 const cors=require('cors');
 const compression = require('compression');
 const mongoose=require('mongoose');
+const user=require('./routes/user');
 
 mongoose.connect(`mongodb+srv://raj:${process.env.CLUSTER_ADMIN_PASSWORD}@cluster0.yufrz.mongodb.net/twitterDB`,{
     useNewUrlParser:true,
@@ -23,6 +24,8 @@ const app=express();
 
 app.use(cors());
 app.use(compression());
+
+app.use(`${config['BASE_API_PATH']}/user`,user);
 
 app.listen(config.SERVER_PORT,()=>{
     console.log(`Server running on PORT:${config.SERVER_PORT}`);

@@ -1,5 +1,6 @@
 let config={
-    'SERVER_PORT' : 3000 || process.env.PORT
+    'SERVER_PORT' : 3001 || process.env.PORT,
+    'BASE_API_PATH':'/twitter',
 };
 
 module.exports=config;
