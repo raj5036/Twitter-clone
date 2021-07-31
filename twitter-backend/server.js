@@ -28,7 +28,7 @@ app.use(compression());
 
 app.use(`${config['BASE_API_PATH']}/user`,user);
 
-app.listen(config.SERVER_PORT,()=>{
-    console.log(`Server running on PORT:${config.SERVER_PORT}`);
+app.listen(config['SERVER_PORT'],()=>{
+    console.log(`Server running on PORT:${config['SERVER_PORT']}`);
 });
 
