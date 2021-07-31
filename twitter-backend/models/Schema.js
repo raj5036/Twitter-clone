@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
+const {Schema,model}=require('mongoose')
 
 let user={
     id          :  {type:String,required:true,unique:true},
@@ -14,3 +14,5 @@ let user={
     comments    :  {type:Array,default:[]},
     retweets    :  {type:Array,default:[]}
 };
+
+let User=module.exports=model('users',new Schema(user));
