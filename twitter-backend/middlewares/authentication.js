@@ -8,7 +8,7 @@ let check_if_user_exists=async(req,res,next)=>{
     if(user){
         next();
     }else{
-        res.status(400).json({success:false,msg:'Signup first'});
+        return res.status(400).json({success:false,msg:'Signup first'});
     }
 };
 
@@ -18,13 +18,13 @@ let authorize_access_token=async(req,res,next)=>{
     const token=authHeader/* && authHeader.split(' ')[1];*/
 
     if(token==null){
-        return res.sendStatus(401); //Unauthorized 
+        return res.sendStatus(401).json({success:false,msg:'Unauthorized'}); //Unauthorized 
     }
 
     //Verify token
     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,payload)=>{
         if(err){
-            return res.sendStatus(403);
+            return res.sendStatus(403).json({success:false,msg:'Forbidden'});
         }
         req.user_id=payload.id;
         next();
