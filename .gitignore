@@ -1,4 +1,5 @@
-twitter-backend/node_modules
+twitter-backend/node_modules/*
+twitter-backend/public/*
 twitter-backend/.env
-twitter-backend/.vscode
+twitter-backend/.vscode/*
 Credentails.txt

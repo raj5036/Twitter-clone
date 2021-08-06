@@ -4,7 +4,6 @@ const {check_if_user_exists,authorize_access_token}=require('../middlewares/auth
 
 const router = express.Router();
 
-
 router.post('/register',(req,res)=>{
     handle_register(req,res);
 });
