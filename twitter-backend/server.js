@@ -7,7 +7,9 @@ const mongoose=require('mongoose');
 const user=require('./routes/user');
 const tweet=require('./routes/tweet');
 
-mongoose.connect(`mongodb+srv://raj:${process.env.CLUSTER_ADMIN_PASSWORD}@cluster0.yufrz.mongodb.net/twitterDB`,{
+mongoose.connect(//`mongodb+srv://raj:${process.env.CLUSTER_ADMIN_PASSWORD}@cluster0.yufrz.mongodb.net/twitterDB`,
+'mongodb://localhost:27017/twitterDB',
+{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true,

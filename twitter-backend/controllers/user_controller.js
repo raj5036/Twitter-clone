@@ -12,7 +12,7 @@ let handle_register = async (req, res) => {
   let hashed_password = await bcrypt.hash(password, salt);
 
   let user = new User({
-    id: uuid.v4(),
+    user_id: uuid.v4(),
     firstname: firstname,
     lastname: lastname,
     email: email, 
@@ -45,9 +45,9 @@ let handle_login=async(req,res)=>{
         res.status(400).json({success:false,msg:'wrong email or password'});
     }
 
-    let {id}=user; 
+    let {user_id}=user; 
 
-    let payload={id:id};
+    let payload={id:user_id};
     let access_token=jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET);
     
     res.status(200).json({success:true,msg:'login successful',access_token:access_token});

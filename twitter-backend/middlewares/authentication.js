@@ -27,6 +27,7 @@ let authorize_access_token=async(req,res,next)=>{
             return res.sendStatus(403).json({success:false,msg:'Forbidden'});
         }
         req.user_id=payload.id;
+        console.log(`req.user_id is `, req.user_id);
         next();
     });
 }

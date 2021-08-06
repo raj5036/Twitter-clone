@@ -3,7 +3,7 @@ const config=require('../config');
 const {Schema,model}=require('mongoose');
 
 let user={
-    id          :  {type:String,required:false,unique:true},
+    user_id     :  {type:String,required:false,unique:true},
     firstname   :  {type:String,required:true},
     lastname    :  {type:String,required:true},
     email       :  {type:String,required:true,unique:true},
@@ -18,7 +18,7 @@ let user={
 };
 
 let tweet={
-    id          :  {type:String,required:true,unique:true},
+    tweet_id    :  {type:String,required:true,unique:true},
     content     :  {type:String,required:true},
     media       :  {type:Array,required:true,default:[]}, //Array of Media IDs
     created_on  :  {type:Date,required:false,default:Date.now},
@@ -31,6 +31,7 @@ let tweet={
 let media={
     media_id    :  {type:String,required:true,unique:true},
     user_id     :  {type:String,required:true},
+    tweet_id    :  {type:String,required:true},
     created_on  :  {type:Date,required:true,default:Date.now},
     filename    :  {type:String,required:true}
 };
