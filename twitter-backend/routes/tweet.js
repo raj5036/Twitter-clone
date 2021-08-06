@@ -1,7 +1,7 @@
 const {Tweet}=require('../models/Schema');
 const {verify_user_permissions}=require('../middlewares/authorization');
 const {authorize_access_token}=require('../middlewares/authentication');
-const {handle_post_tweet}=require('../controllers/tweet_controller');
+const {handle_post_tweet, handle_delete_tweet}=require('../controllers/tweet_controller');
 const {imageFilter,storage}=require('../middlewares/file_upload');
 const multer=require('multer');
 
@@ -12,6 +12,11 @@ const router=express.Router();
 router.use('/post',authorize_access_token,verify_user_permissions,upload);
 router.post('/post',(req,res)=>{
     handle_post_tweet(req,res);
+});
+
+router.use('/delete',authorize_access_token);
+router.post('/delete',(req,res)=>{
+    handle_delete_tweet(req,res);
 });
 
 module.exports=router;
