@@ -46,19 +46,17 @@ class App extends Component {
     // console.log(this.props.loggedUser);
     this.getLocalStorageConfigSettings();
     let token = GenUtil.getAccessToken();
-    // console.log(token);
-    if (token) {
-      let tokenObj = JSON.parse(window.atob(token.split('.')[1]));
-      // console.log(tokenObj);
-      if (new Date().getTime() > tokenObj.exp * 1000) {
-        // console.log('expired');
-        localStorage.removeItem('token');
-        toast.error('Token Expired!!! Login Again');
-      } else {
-        this.props.loginUser({ token, userObj: tokenObj });
-        // console.log('login');
-      }
-    }
+    console.log(`in app `,token);
+    // if (token) {
+    //   let tokenObj = JSON.parse(window.atob(token.split('.')[1]));
+    //   // console.log(tokenObj);
+    //   if (new Date().getTime() > tokenObj.exp * 1000) {
+    //     localStorage.removeItem('token');
+    //     toast.error('Token Expired!!! Login Again');
+    //   } else {
+    //     this.props.loginUser({ token, userObj: tokenObj });
+    //   }
+    // }
     this.setState({ loggedIn: this.props.loggedIn });
   };
 
@@ -87,9 +85,6 @@ class App extends Component {
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <BrowserRouter>
                   <Switch>
-                    {/*<Route exact path='/product' component={PresentationPage}/>*/}
-                    {/*<Route exact path="/blog/:slug" component={BlogDetailView}/>*/}
-                    {/*<PrivateRoute authed={localStorage.getItem('access_token')} path="/my" component={Routes}/>*/}
                     <Route
                       exact
                       path={RoutePath.loginPath}
@@ -124,8 +119,7 @@ class App extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    loggedIn: true,
-    // loggedIn: state.UserReducer.loggedIn,
+    loggedIn: state.UserReducer.loggedIn,
     loggedUser: state.UserReducer.loggedUser,
     isDarkMode: state.SettingsReducer.isDarkMode,
   };

@@ -5,13 +5,14 @@ class APIServices {
   static async request(axiosConfig) {
     try {
       const response = await Axios.request(axiosConfig);
-      // console.log('API SERVICES RESPONSE', response);
+      console.log('API SERVICES RESPONSE', response);
       // console.log(response.data.success);
       if (response.data.success) {
-        // console.log('calling service response');
+        // console.log('calling service response', response);
         return ServiceResponse.success(
           response.data.msg,
-          response.data.token || response.data.data
+          response.data,
+          response.status
         );
       } else {
         if (process.env.NODE_ENV === 'development') {
@@ -29,6 +30,8 @@ class APIServices {
         return ServiceResponse.error('The connection timed out');
       }
     }
+    // const response = await Axios.request(axiosConfig);
+    // console.log('API SERVICES RESPONSE', response);
   }
 }
 

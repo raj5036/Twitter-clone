@@ -1,6 +1,6 @@
 window.AwirosDeploymentConf = {
    getDevelopmentHost: () => {
-      return 'http://192.168.0.147:3000'
+      return 'http://localhost:3001';
    },
    getProductionHost: () => {
       return `http://${window.location.hostname}:3000`

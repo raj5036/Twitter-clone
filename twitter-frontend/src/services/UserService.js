@@ -2,10 +2,11 @@ import APIPath from '../lib/APIPath';
 import APIServices from './serviceHelpers/APIServices';
 import GenUtil from '../util/GenUtil';
 import { getHost } from '../lib/Constants';
+
 class UserService {
   static async login(data) {
     const axiosConfig = {
-      url: `${getHost()}${APIPath.loginPath}`,
+      url: `${getHost()}${APIPath.LOGIN_PATH}`,
       method: 'POST',
       crossDomain: true,
       dataType: 'json',
@@ -15,15 +16,16 @@ class UserService {
       data: data,
     };
     let sr = await APIServices.request(axiosConfig);
-    if (sr.success) {
-      GenUtil.setAccessToken(sr.data);
-    }
+    // if (sr.success) {
+    //   GenUtil.setAccessToken(sr.data);
+    // }
+    console.log(`sr is `,sr)
     return sr;
   }
 
   static async logout() {
     const axiosConfig = {
-      url: `${getHost()}${APIPath.logoutPath}`,
+      url: `${getHost()}${APIPath.LOGOUT_PATH}`,
       method: 'POST',
       crossDomain: true,
       dataType: 'json',

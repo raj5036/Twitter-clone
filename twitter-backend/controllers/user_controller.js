@@ -37,20 +37,34 @@ let handle_login=async(req,res)=>{
     
     if(!user){
         res.status(400).json({success:false,msg:'wrong email or password'});
+        return;
     }
 
     let password_check_flag=await bcrypt.compare(password,user.password);
     
     if(!password_check_flag){
         res.status(400).json({success:false,msg:'wrong email or password'});
+        return;
     }
-
+ 
     let {user_id}=user; 
 
     let payload={id:user_id};
     let access_token=jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET);
     
-    res.status(200).json({success:true,msg:'login successful',access_token:access_token});
+    res.status(200).json({
+      success:true,
+      msg:'Login successful',
+      data:{
+        token:access_token,
+        userObj:{
+          email:email,
+          firstname:user.firstname,
+          lastname : user.lastname,
+          permissions:user.permissions
+        }
+      }
+    }); 
 }
 
 let handle_logout=async(req,res)=>{

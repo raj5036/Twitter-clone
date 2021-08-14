@@ -4,6 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import GenUtil from '../../util/GenUtil';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LoginContainerStyles from './LoginContainerStyles';
 import RoutePath from '../../lib/RoutePath';
@@ -23,8 +24,6 @@ class LoginContainer extends Component {
     this.state = {
       email: '',
       password: '',
-      // email: 'demo@awiros.com',
-      // password: 'awisys555',
     };
   }
 
@@ -45,14 +44,20 @@ class LoginContainer extends Component {
   handleLogin = async () => {
     // e.preventDefault();
     let { email, password } = this.state;
+    if(!email || !password){
+      toast.error('All fields are necessary');
+      return;
+    }
     const response = await UserService.login({ email, password });
-    // console.log(response);
+    
     if (response.success) {
-      toast.success('Login successful');
-      this.props.loginUser({ token: response.data });
+      toast.success(response.message);
+      GenUtil.setAccessToken(response.data.token);
+      console.log(response.data);
+      this.props.loginUser(response.data);
       RoutePath.navigateTo(this.props, RoutePath.homePath);
     } else {
-      toast.error(response.message);
+      toast.error('Wrong email or password');
     }
   };
 
@@ -110,33 +115,17 @@ class LoginContainer extends Component {
                 autoComplete="current-password"
                 onChange={this.handleChange}
               />
-              {/*<FormControlLabel*/}
-              {/*   control={<Checkbox value="remember" color="primary"/>}*/}
-              {/*   label="Remember me"*/}
-              {/*/>*/}
+      
               <div style={{ height: this.props.theme.spacing(5) }}></div>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
-                // onClick={this.handleLogin}
-                // className={classes.submit}
               >
                 Sign In
               </Button>
-              {/*<Grid container>*/}
-              {/*   <Grid item xs>*/}
-              {/*      <Link href="#" variant="body2">*/}
-              {/*         Forgot password?*/}
-              {/*      </Link>*/}
-              {/*   </Grid>*/}
-              {/*   <Grid item>*/}
-              {/*      <Link href="#" variant="body2">*/}
-              {/*         {"Don't have an account? Sign Up"}*/}
-              {/*      </Link>*/}
-              {/*   </Grid>*/}
-              {/*</Grid>*/}
+             
             </form>
           </div>
         </Container>
