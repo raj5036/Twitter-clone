@@ -4,7 +4,6 @@ import './assets/fonts/montserrat/montserrat.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
-import { ToastContainer, toast } from 'material-react-toastify';
 
 import AppContainer from './components/AppContainer/AppContainer';
 import AppStyles from './AppStyles';
@@ -19,6 +18,7 @@ import PrivateRoute from './util/PrivateRoute';
 import RoutePath from './lib/RoutePath';
 import SettingsActions from './redux/actions/SettingsActions';
 import { ThemeProvider } from '@material-ui/styles';
+import { ToastContainer } from 'material-react-toastify';
 import UserActions from './redux/actions/UserActions';
 import { connect } from 'react-redux';
 import moment from 'moment';

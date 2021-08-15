@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-import Avatar from '@material-ui/core/Avatar';
+import Bird from '../../assets/images/bird.png'
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import GenUtil from '../../util/GenUtil';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Grid } from '@material-ui/core';
 import LoginContainerStyles from './LoginContainerStyles';
 import RoutePath from '../../lib/RoutePath';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +13,14 @@ import UserService from '../../services/UserService';
 import { connect } from 'react-redux';
 import { toast } from 'material-react-toastify';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+// import TwitterLoginImage from '../../assets/images/twitter_login_page_image.png';
+
+
+
+
+
+
 
 let styles = LoginContainerStyles;
 
@@ -44,15 +50,15 @@ class LoginContainer extends Component {
   handleLogin = async () => {
     // e.preventDefault();
     let { email, password } = this.state;
-    if(!email || !password){
+    if (!email || !password) {
       toast.error('All fields are necessary');
       return;
     }
     const response = await UserService.login({ email, password });
-    
+
     if (response.success) {
       toast.success(response.message);
-      let {token,userObj}=response.data;
+      let { token, userObj } = response.data;
       GenUtil.setAccessToken(token);
       this.props.loginUser(userObj);
       RoutePath.navigateTo(this.props, RoutePath.homePath);
@@ -74,15 +80,27 @@ class LoginContainer extends Component {
     let { classes } = this.props;
     let { email, password } = this.state;
     return (
-      <div className={classes.root}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        wrap="wrap"
+        className={classes.root}
+      >
+          <Grid item className={classes.imageContainer}>
+            <img
+              src={Bird}
+              alt="Bird"
+            />
+
+          </Grid>
+          <Grid item className={classes.paper}>
+            <Typography component="h1" variant="h1">
+              Happening now
+            </Typography>
+            <Typography component="h5" variant="h5">
+              Join Twitter Today
             </Typography>
             <form
               className={classes.form}
@@ -115,7 +133,7 @@ class LoginContainer extends Component {
                 autoComplete="current-password"
                 onChange={this.handleChange}
               />
-      
+
               <div style={{ height: this.props.theme.spacing(5) }}></div>
               <Button
                 type="submit"
@@ -125,11 +143,9 @@ class LoginContainer extends Component {
               >
                 Sign In
               </Button>
-             
             </form>
-          </div>
-        </Container>
-      </div>
+          </Grid>
+      </Grid>
     );
   }
 }

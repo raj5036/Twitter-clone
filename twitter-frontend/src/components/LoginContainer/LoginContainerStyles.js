@@ -1,10 +1,15 @@
 let LoginContainerStyles = theme => ({
    root: {
-      // margin: theme.spacing(0),
-      // backgroundColor: theme.palette.background.default
+      height:'100vh',
+   },
+   imageContainer:{
+      width:'50vw',
+      display:'flex',
+      justifyContent:'center'
    },
    paper: {
-      paddingTop: theme.spacing(8),
+      height:'100vh',
+      width:'50vw',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -14,8 +19,8 @@ let LoginContainerStyles = theme => ({
       backgroundColor: theme.palette.secondary.main,
    },
    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
+      // width: '100%', // Fix IE 11 issue.
+      // marginTop: theme.spacing(1),
    },
    submit: {
       margin: theme.spacing(3, 0, 2),
