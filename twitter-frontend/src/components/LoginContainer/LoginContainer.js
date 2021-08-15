@@ -52,9 +52,9 @@ class LoginContainer extends Component {
     
     if (response.success) {
       toast.success(response.message);
-      GenUtil.setAccessToken(response.data.token);
-      console.log(response.data);
-      this.props.loginUser(response.data);
+      let {token,userObj}=response.data;
+      GenUtil.setAccessToken(token);
+      this.props.loginUser(userObj);
       RoutePath.navigateTo(this.props, RoutePath.homePath);
     } else {
       toast.error('Wrong email or password');

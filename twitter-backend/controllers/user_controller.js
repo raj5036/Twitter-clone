@@ -55,14 +55,12 @@ let handle_login=async(req,res)=>{
     res.status(200).json({
       success:true,
       msg:'Login successful',
-      data:{
-        token:access_token,
-        userObj:{
-          email:email,
-          firstname:user.firstname,
-          lastname : user.lastname,
-          permissions:user.permissions
-        }
+      token:access_token,
+      userObj:{
+        email:email,
+        firstname:user.firstname,
+        lastname : user.lastname,
+        permissions:user.permissions
       }
     }); 
 }

@@ -1,6 +1,6 @@
 class RoutePath {
    static loginPath = '/login';
-   static homePath = "/";
+   static homePath = "/home";
 
    static settingsPath = '/settings';
 

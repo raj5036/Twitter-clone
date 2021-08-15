@@ -28,9 +28,6 @@ const styles = AppStyles;
 
 const toastConfiguration = {
   autoClose: 2000,
-  // draggable: true,
-  // pauseOnHover: true
-  //etc you get the idea
 };
 class App extends Component {
   constructor(props) {
@@ -46,32 +43,21 @@ class App extends Component {
     // console.log(this.props.loggedUser);
     this.getLocalStorageConfigSettings();
     let token = GenUtil.getAccessToken();
-    console.log(`in app `,token);
-    // if (token) {
-    //   let tokenObj = JSON.parse(window.atob(token.split('.')[1]));
-    //   // console.log(tokenObj);
-    //   if (new Date().getTime() > tokenObj.exp * 1000) {
-    //     localStorage.removeItem('token');
-    //     toast.error('Token Expired!!! Login Again');
-    //   } else {
-    //     this.props.loginUser({ token, userObj: tokenObj });
-    //   }
-    // }
+    console.log(`in app `, token);
+
     this.setState({ loggedIn: this.props.loggedIn });
   };
 
   getLocalStorageConfigSettings = () => {
     let config = JSON.parse(localStorage.getItem('config'));
-    console.log(config);
-    // config && this.props.setTouchlessMode(!!config.isTouchlessMode)
-    // this.props.setDarkMode(true);
+    // console.log(config);
     this.props.setDarkMode(!!config?.isDarkMode);
-    // config && this.setState({prefersDarkTheme: !!config.isDarkMode})
   };
 
   render() {
     const { classes, isDarkMode } = this.props;
     console.log('isDarkMode', isDarkMode);
+    let token = GenUtil.getAccessToken();
     if (this.state.loggedIn === undefined) {
       return <></>;
     } else {
@@ -90,21 +76,12 @@ class App extends Component {
                       path={RoutePath.loginPath}
                       component={LoginContainer}
                     />
-                    {/* <Route
-                      exact
-                      path={RoutePath.signupPath}
-                      authorized={this.props.loggedIn}
-                      component={SignupContainer}
-                    /> */}
                     <PrivateRoute
-                      // exact
+                      exact
                       path={RoutePath.homePath}
-                      authorized={this.props.loggedIn}
+                      authorized={token}
                       component={AppContainer}
                     />
-                    {/* <Route
-                      component={AppContainer}
-                    /> */}
                   </Switch>
                 </BrowserRouter>
               </MuiPickersUtilsProvider>
